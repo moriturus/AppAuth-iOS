@@ -16,6 +16,7 @@
         limitations under the License.
  */
 
+@import SafariServices;
 #import <UIKit/UIKit.h>
 
 #import "OIDExternalUserAgent.h"
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
         \SFSafariViewController.
  */
 - (nullable instancetype)initWithPresentingViewController:
-    (UIViewController *)presentingViewController
+    (UIViewController<SFSafariViewControllerDelegate> *)presentingViewController
     NS_DESIGNATED_INITIALIZER;
 
 @end

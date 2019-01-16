@@ -16,6 +16,7 @@
         limitations under the License.
  */
 
+@import SafariServices;
 #import "OIDAuthState+IOS.h"
 
 #import "OIDExternalUserAgentIOS.h"
@@ -24,7 +25,7 @@
 
 + (id<OIDExternalUserAgentSession>)
     authStateByPresentingAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest
-                     presentingViewController:(UIViewController *)presentingViewController
+                     presentingViewController:(UIViewController<SFSafariViewControllerDelegate> *)presentingViewController
                                      callback:(OIDAuthStateAuthorizationCallback)callback {
     OIDExternalUserAgentIOS *externalUserAgent =
         [[OIDExternalUserAgentIOS alloc]
