@@ -65,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
   BOOL openedSafari = NO;
   NSURL *requestURL = [request externalUserAgentRequestURL];
 
+  /*
   // iOS 12 and later, use ASWebAuthenticationSession
   if (@available(iOS 12.0, *)) {
     __weak OIDExternalUserAgentIOS *weakSelf = self;
@@ -126,7 +127,14 @@ NS_ASSUME_NONNULL_BEGIN
     [_presentingViewController presentViewController:safariVC animated:YES completion:nil];
     openedSafari = YES;
   // iOS 8 and earlier, use mobile Safari
-  }
+  }*/
+  
+  SFSafariViewController *safariVC =
+  [[SFSafariViewController alloc] initWithURL:requestURL];
+  safariVC.delegate = self;
+  _safariVC = safariVC;
+  [_presentingViewController presentViewController:safariVC animated:YES completion:nil];
+  openedSafari = YES;
 
   if (!openedSafari) {
     [self cleanUp];
@@ -147,12 +155,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpartial-availability"
   SFSafariViewController *safariVC = _safariVC;
-  SFAuthenticationSession *authenticationVC = _authenticationVC;
-  ASWebAuthenticationSession *webAuthenticationVC = _webAuthenticationVC;
+  //SFAuthenticationSession *authenticationVC = _authenticationVC;
+  //ASWebAuthenticationSession *webAuthenticationVC = _webAuthenticationVC;
 #pragma clang diagnostic pop
   
   [self cleanUp];
   
+  /*
   if (@available(iOS 12.0, *)) {
     // dismiss the ASWebAuthenticationSession
     [webAuthenticationVC cancel];
@@ -168,6 +177,11 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
       if (completion) completion();
     }
+  } else {
+    if (completion) completion();
+  }*/
+  if (safariVC) {
+    [safariVC dismissViewControllerAnimated:YES completion:completion];
   } else {
     if (completion) completion();
   }
