@@ -17,7 +17,6 @@
  */
 
 #import <UIKit/UIKit.h>
-@import SafariServices;
 
 #import "OIDAuthorizationService.h"
 #import "OIDExternalUserAgentSession.h"
@@ -38,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
         @c OIDExternalUserAgentSession.resumeExternalUserAgentFlowWithURL: message.
  */
 + (id<OIDExternalUserAgentSession>) presentAuthorizationRequest:(OIDAuthorizationRequest *)request
-    presentingViewController:(UIViewController<SFSafariViewControllerDelegate> *)presentingViewController
+    presentingViewController:(UIViewController *)presentingViewController
                     callback:(OIDAuthorizationCallback)callback;
 @end
 

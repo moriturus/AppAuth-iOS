@@ -16,7 +16,6 @@
         limitations under the License.
  */
 
-@import SafariServices;
 #import <UIKit/UIKit.h>
 
 #import "OIDAuthState.h"
@@ -43,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (id<OIDExternalUserAgentSession>)
     authStateByPresentingAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest
-                     presentingViewController:(UIViewController<SFSafariViewControllerDelegate> *)presentingViewController
+                     presentingViewController:(UIViewController *)presentingViewController
                                      callback:(OIDAuthStateAuthorizationCallback)callback;
 
 @end

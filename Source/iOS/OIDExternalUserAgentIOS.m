@@ -16,7 +16,6 @@
         limitations under the License.
  */
 
-@import SafariServices;
 #import "OIDExternalUserAgentIOS.h"
 
 #import <SafariServices/SafariServices.h>
@@ -32,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @implementation OIDExternalUserAgentIOS {
-  UIViewController<SFSafariViewControllerDelegate> *_presentingViewController;
+  UIViewController *_presentingViewController;
 
   BOOL _externalUserAgentFlowInProgress;
   __weak id<OIDExternalUserAgentSession> _session;
@@ -45,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable instancetype)initWithPresentingViewController:
-        (UIViewController<SFSafariViewControllerDelegate> *)presentingViewController {
+        (UIViewController *)presentingViewController {
   self = [super init];
   if (self) {
     _presentingViewController = presentingViewController;
@@ -197,16 +196,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - SFSafariViewControllerDelegate
-
-- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
-  if (_presentingViewController) {
-    [_presentingViewController safariViewController:controller didCompleteInitialLoad:didLoadSuccessfully];
-  }
-}
-
-- (NSArray<UIActivity *> *)safariViewController:(SFSafariViewController *)controller activityItemsForURL:(NSURL *)URL title:(nullable NSString *)title {
-  return [_presentingViewController safariViewController:controller activityItemsForURL:URL title:title];
-}
 
 - (void)safariViewControllerDidFinish:(SFSafariViewController *)controller NS_AVAILABLE_IOS(9.0) {
   if (controller != _safariVC) {
